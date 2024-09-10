@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var guessing: UIImageView!
+ 
+    @IBOutlet weak var guesses: UILabel!
     
 
     @IBOutlet weak var correctWordLabel: UILabel!
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         newSet()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "split8.pdf")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bananas8.pdf")!)
     }
         var currentGame: Hangman!
         
@@ -66,7 +67,8 @@ class ViewController: UIViewController {
             let wordWithSpacing = letters.joined(separator: " ")
             correctWordLabel.text = wordWithSpacing
             scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
-            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "split\(currentGame.incorrectGuessesRemaining)")!)
+            guesses.text = "Guesses Remaining: \(currentGame.incorrectGuessesRemaining)"
+            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bananas\(currentGame.incorrectGuessesRemaining)")!)
             
         }
     
