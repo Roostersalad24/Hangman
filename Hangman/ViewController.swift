@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
- 
+    @IBOutlet weak var letterStack: UIStackView!
+    
     @IBOutlet weak var guesses: UILabel!
     
 
@@ -35,9 +36,20 @@ class ViewController: UIViewController {
     }
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         newSet()
+        applyBlurEffect1()
+        
+        
+
+        /*  let blur = UIVisualEffectView(effect: UIBlurEffect(style:
+                                                                UIBlurEffect.Style.light))
+        blur.frame = letterStack.bounds
+        blur.isUserInteractionEnabled = false //This allows touches to forward to the button.
+       
+        letterStack.insertSubview(blur, at: 0) */
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bananas8.pdf")!)
     }
         var currentGame: Hangman!
@@ -99,6 +111,22 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    
+    func applyBlurEffect1() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = letterStack.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.isUserInteractionEnabled = false
+        
+        
+        letterStack.addSubview(blurEffectView)
+        letterStack.sendSubviewToBack(blurEffectView)
+    }
+    
+   
+   
    
     
 }
