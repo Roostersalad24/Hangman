@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var letterButtons: [UIButton]!
     
-    var wordBank = ["chocolate", "vanilla", "cherry", "strawberry", "mint"]
+    var wordBank = ["CHOCOLATE"]
     
     let incorrectLettersTolerated = 8
     
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
             let wordWithSpacing = letters.joined(separator: " ")
             correctWordLabel.text = wordWithSpacing
             scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
-            guesses.text = "Guesses Remaining: \(currentGame.incorrectGuessesRemaining)"
+            guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
             self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bananas\(currentGame.incorrectGuessesRemaining)")!)
             
         }
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
     @IBAction func letterButtonPressed(_ sender: UIButton) {
         sender.isEnabled = false
         let letterString = sender.configuration!.title!
-        let letter = Character(letterString.lowercased())
+        let letter = Character(letterString)
         currentGame.playerGuessed(letter: letter)
         updateHangmanGame()
     }
