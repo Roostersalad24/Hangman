@@ -20,7 +20,7 @@ class BroccoliViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
-    var wordBank = ["VEGETABLE"]
+    var wordBank = ["VEGETABLE", "CHEDDAR"]
     
     let incorrectLettersTolerated = 8
     
