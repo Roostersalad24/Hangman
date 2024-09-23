@@ -20,7 +20,7 @@ class PizzaViewController: UIViewController {
     @IBOutlet weak var letterStack: UIStackView!
     
     
-    var wordBank = ["SUPREME"]
+    var wordBank = ["PEPPERONI", "SAUSAGE", "BACON", "HAM", "CHICKEN", "BEEF",  "ANCHOVIES", "TUNA", "SALAMI", "MUSHROOMS", "ONIONS", "GARLIC", "BELLPEPPER", "SPINACH", "KALE", "OLIVES", "TOMATO", "JALAPENO", "PINEAPPLE", "ARTICHOKE", "BASIL", "OREGANO", "PARMESAN", "MOZZARELLA", "CHEDDAR", "FETA", "RICOTTA", "PROVOLONE", "ASIAGO", "GORGONZOLA", "ZUCCHINI", "EGGPLANT", "CORN", "ARUGULA", "CAPERS", "PROSCIUTTO", "PANCETTA", "PESTO", "CHORIZO", "ROSEMARY"]
     
     let incorrectLettersTolerated = 8
     

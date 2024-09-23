@@ -20,7 +20,8 @@ class SushiViewController: UIViewController {
     @IBOutlet weak var letterStack: UIStackView!
     
     
-    var wordBank = ["DRAGON"]
+    var wordBank = ["RICE", "SEAWEED", "SALMON", "TUNA", "EEL", "CRAB", "SHRIMP", "OCTOPUS", "SQUID", "AVOCADO", "CUCUMBER", "CARROT", "RADISH", "TOFU", "JALAPENO", "MANGO", "SCALLIONS", "CILANTRO", "YELLOWTAIL", "CAVIAR”", "TEMPURA", "CHIVES", "EGG", "FISH", "CHIVES", "GINGER", "WASABI", "NORI", "MAYO", "URCHIN" ]
+
     
     let incorrectLettersTolerated = 8
     

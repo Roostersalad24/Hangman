@@ -6,12 +6,6 @@
 	objectVersion = 74;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		4221CF0F2C94BB3A009A022C /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4221CF0E2C94BB3A009A022C /* HeaderCollectionReusableView.swift */; };
-		422A25DA2C94A2CB0093995A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A25D92C94A2CB0093995A /* MenuViewController.swift */; };
-		422A25DC2C94A51C0093995A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A25DB2C94A51C0093995A /* PhotoCollectionViewCell.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		42FD87B42C7AD5EB00792537 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -30,9 +24,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4221CF0E2C94BB3A009A022C /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
-		422A25D92C94A2CB0093995A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		422A25DB2C94A51C0093995A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		42FD879D2C7AD5EA00792537 /* Hangman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hangman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42FD87B32C7AD5EB00792537 /* HangmanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangmanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42FD87BD2C7AD5EB00792537 /* HangmanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangmanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,9 +86,6 @@
 		42FD87942C7AD5EA00792537 = {
 			isa = PBXGroup;
 			children = (
-				422A25D92C94A2CB0093995A /* MenuViewController.swift */,
-				4221CF0E2C94BB3A009A022C /* HeaderCollectionReusableView.swift */,
-				422A25DB2C94A51C0093995A /* PhotoCollectionViewCell.swift */,
 				42FD879F2C7AD5EA00792537 /* Hangman */,
 				42FD87B62C7AD5EB00792537 /* HangmanTests */,
 				42FD87C02C7AD5EB00792537 /* HangmanUITests */,
@@ -258,9 +246,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				422A25DC2C94A51C0093995A /* PhotoCollectionViewCell.swift in Sources */,
-				4221CF0F2C94BB3A009A022C /* HeaderCollectionReusableView.swift in Sources */,
-				422A25DA2C94A2CB0093995A /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,12 +289,13 @@
 				DEVELOPMENT_TEAM = V8CF6P9Z7U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hangman/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.kids-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,12 +323,13 @@
 				DEVELOPMENT_TEAM = V8CF6P9Z7U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hangman/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.kids-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

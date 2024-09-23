@@ -21,7 +21,7 @@ class SaladViewController: UIViewController {
     @IBOutlet weak var letterStack: UIStackView!
     
     
-    var wordBank = ["CEASAR"]
+    var wordBank = ["LETTUCE", "TOMATO", "CUCUMBER", "CARROT", "ONION", "BELLPEPPER", "SPINACH", "KALE", "ARUGULA", "AVOCADO", "CHICKEN", "TUNA", "FETA", "OLIVES", "EGG", "BACON", "CROUTON", "CHEESE", "PINEAPPLE", "STRAWBERRY", "ALMONDS", "WALNUTS", "PECAN", "CHICKPEA", "QUINOA", "FARRO", "MUSHROOM", "BEETS", "ARTICHOKE", "ZUCCHINI", "RADISH", "BROCCOLI", "CAULIFLOWER", "PEAR", "APPLE", "CRANBERRY", "BLUEBERRIES", "POMEGRANATE", "ORANGE", "CORN", "BLACKBEANS", "EDAMAME", "TOFU", "RICE", "BARLEY", "COUSCOUS", "HUMMUS", "GARBANZO", "PARMESAN", "ROMAINE", "DILL", "CILANTRO", "CAPERS", "CHAI", "VINEGAR", "GARLIC", "BASIL"]
     
     let incorrectLettersTolerated = 8
     
