@@ -42,28 +42,24 @@ class SaladViewController: UIViewController {
         super.viewDidLoad()
         newSet()
         applyBlurEffect1()
-        
-        
-
-        /*  let blur = UIVisualEffectView(effect: UIBlurEffect(style:
-                                                                UIBlurEffect.Style.light))
-        blur.frame = letterStack.bounds
-        blur.isUserInteractionEnabled = false //This allows touches to forward to the button.
-       
-        letterStack.insertSubview(blur, at: 0) */
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "salad8.pdf")!)
     }
         var currentGame: Hangman!
         
-    func newSet () {
+    func newSet() {
         if !wordBank.isEmpty {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
-            updateUI()
+            correctWordLabel.textColor = .black  // Reset text color to default
+            updateUI()  // Update UI for the new word
         } else {
-            enableLetterButtons(false)
+            enableLetterButtons(false)  // Disable buttons if no words are left
         }
+    
+
+    
+
         
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
@@ -98,19 +94,63 @@ class SaladViewController: UIViewController {
         sender.isEnabled = false
         let letterString = sender.configuration!.title!
         let letter = Character(letterString)
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+            feedbackGenerator.impactOccurred()
+
         currentGame.playerGuessed(letter: letter)
         updateHangmanGame()
     }
     
     func updateHangmanGame() {
         if currentGame.incorrectGuessesRemaining == 0 {
+            // Game lost - reveal the word in red
+            currentGame.isGameOver = true  // Mark game as over
+            correctWordLabel.textColor = .red
+            showCorrectWord()
             losesInAll += 1
+            disableLetterButtons()
+            delayNewGame()
         } else if currentGame.word == currentGame.formattedWord {
+            // Game won - reveal the word in green
+            currentGame.isGameOver = true  // Mark game as over
+            correctWordLabel.textColor = .green
+            showCorrectWord()
             winsInAll += 1
+            disableLetterButtons()
+            
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                    feedbackGenerator.impactOccurred()
+            
+            delayNewGame()
         } else {
             updateUI()
+            
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: currentGame.word.contains(currentGame.formattedWord) ? .light : .medium)
+                    feedbackGenerator.impactOccurred()
         }
     }
+
+
+    func showCorrectWord() {
+        // Show the fully revealed correct word (no underscores)
+        correctWordLabel.text = currentGame.formattedWord
+    }
+
+
+    func delayNewGame() {
+        // Delay the start of the new game by 2 seconds to show the result
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.newSet()  // Start a new game after a 2-second delay
+        }
+    }
+
+    func disableLetterButtons() {
+        for button in letterButtons {
+            button.isEnabled = false
+        }
+    }
+
+
     
     
     
