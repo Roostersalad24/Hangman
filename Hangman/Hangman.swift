@@ -12,34 +12,57 @@ struct Hangman {
     var incorrectGuessesRemaining: Int
     var guessedLetters: [Character]
     
-    // A new property to track if the game is over
-    var isGameOver: Bool = false
+    // Computed property to check if the game is won
+    var isGameWon: Bool {
+        return word == formattedWordWithoutCheckingGameOver
+    }
     
-    // Computed property to format the word based on game state
-    var formattedWord: String {
+    // Computed property to check if the game is lost
+    var isGameLost: Bool {
+        return incorrectGuessesRemaining == 0
+    }
+    
+    // Format the word with underscores for unguessed letters
+    var formattedWordWithoutCheckingGameOver: String {
         var guessedWord = ""
-        
-        if isGameOver {
-            // If the game is over, reveal the entire word
-            guessedWord = word
-        } else {
-            // If the game is ongoing, reveal guessed letters and use "_" for unguessed ones
-            for letter in word {
-                if guessedLetters.contains(letter) {
-                    guessedWord += "\(letter)"
-                } else {
-                    guessedWord += "_"
-                }
+        for letter in word {
+            if guessedLetters.contains(letter) {
+                guessedWord += "\(letter)"
+            } else {
+                guessedWord += "_"
             }
         }
         return guessedWord
     }
     
-    // Handle the player's guess and update the game state
+    // If the game is over (won or lost), reveal the word
+    var formattedWord: String {
+        if isGameWon || isGameLost {
+            return word
+        } else {
+            return formattedWordWithoutCheckingGameOver
+        }
+    }
+    
+    // Initialize the game with the first letter revealed
+    init(word: String, incorrectGuessesRemaining: Int, guessedLetters: [Character]) {
+        self.word = word
+        self.incorrectGuessesRemaining = incorrectGuessesRemaining
+        self.guessedLetters = guessedLetters
+        
+        // Automatically reveal the first letter of the word
+        if let firstLetter = word.first {
+            self.guessedLetters.append(firstLetter)
+        }
+    }
+    
+    // Updates the game state when a letter is guessed
     mutating func playerGuessed(letter: Character) {
-        guessedLetters.append(letter)
-        if !word.contains(letter) {
-            incorrectGuessesRemaining -= 1
+        if !guessedLetters.contains(letter) {
+            guessedLetters.append(letter)
+            if !word.contains(letter) {
+                incorrectGuessesRemaining -= 1
+            }
         }
     }
 }

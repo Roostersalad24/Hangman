@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var letterButtons: [UIButton]!
     
-    var wordBank = ["CHOCOLATE", "VANILLA", "CHOCOLATE", "STRAWBERRY", "MINT", "COFFEE", "CARAMEL", "BUTTERSCOTCH", "PISTACHIO", "BANANA", "LEMON", "MANGO", "COCONUT", "RASPBERRY", "BLACKBERRY", "BLUEBERRY", "PEACH", "CHERRY", "ORANGE", "WATERMELON", "PINEAPPLE", "GRAPE", "MATCHA", "MOCHA", "TIRAMISU", "CINNAMON", "PEANUT", "ALMOND", "PECAN", "HAZELNUT", "WALNUT", "COTTONCANDY", "COOKIE", "BROWNIE", "BUBBLEGUM", "MARSHMALLOW", "GRAHAM", "TUTTIFRUTTI", "GINGER", "POMEGRANATE", "FIG", "AVOCADO", "KIWI", "LICORICE", "LAVENDER", "CUSTARD", "CHAI", "PUMPKIN", "BIRTHDAYCAKE","CHEESECAKE", "PRALINE", "ESPRESSO", "DULCEDELECHE", "MAPLE",  "CANDYCANE", "TOFFEE", "PEPPERMINT", "NEAPOLITAN"]
+    var wordBank = ["CHOCOLATE", "VANILLA", "CHOCOLATE", "STRAWBERRY", "MINT", "COFFEE", "CARAMEL", "BUTTERSCOTCH", "PISTACHIO", "BANANA", "LEMON", "MANGO", "COCONUT", "RASPBERRY", "BLACKBERRY", "BLUEBERRY", "PEACH", "CHERRY", "ORANGE", "WATERMELON", "PINEAPPLE", "GRAPE", "MATCHA", "MOCHA", "TIRAMISU", "CINNAMON", "PEANUT", "ALMOND", "PECAN", "HAZELNUT", "WALNUT", "COTTONCANDY", "COOKIE", "BROWNIE", "BUBBLEGUM", "MARSHMALLOW", "GRAHAMCRACKER", "TUTTIFRUTTI", "GINGER", "POMEGRANATE", "FIG", "AVOCADO", "KIWI", "LICORICE", "LAVENDER", "CUSTARD", "CHAI", "PUMPKIN", "BIRTHDAYCAKE","CHEESECAKE", "PRALINE", "ESPRESSO", "MAPLE",  "CANDYCANE", "TOFFEE", "PEPPERMINT", "NEAPOLITAN"]
     
     let incorrectLettersTolerated = 8
     
@@ -44,17 +44,11 @@ class ViewController: UIViewController {
         
         
 
-        /*  let blur = UIVisualEffectView(effect: UIBlurEffect(style:
-                                                                UIBlurEffect.Style.light))
-        blur.frame = letterStack.bounds
-        blur.isUserInteractionEnabled = false //This allows touches to forward to the button.
-       
-        letterStack.insertSubview(blur, at: 0) */
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bananas8.pdf")!)
     }
         var currentGame: Hangman!
         
-    func newSet () {
+    func newSet() {
         if !wordBank.isEmpty {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
@@ -63,26 +57,23 @@ class ViewController: UIViewController {
         } else {
             enableLetterButtons(false)
         }
-        
-        func enableLetterButtons(_ enable: Bool) {
-            for button in letterButtons {
-                button.isEnabled = enable
-            }
-        }
     }
+
     
-        func updateUI() {
-            var letters = [String]()
-            for letter in currentGame.formattedWord {
-                letters.append(String(letter))
-            }
-            let wordWithSpacing = letters.joined(separator: " ")
-            correctWordLabel.text = wordWithSpacing
-            scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
-            guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
-            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bananas\(currentGame.incorrectGuessesRemaining)")!)
-            
+    func updateUI(wordColor: UIColor = .black) {
+        var letters = [String]()
+        for letter in currentGame.formattedWord {
+            letters.append(String(letter))
         }
+        let wordWithSpacing = letters.joined(separator: " ")
+        correctWordLabel.text = wordWithSpacing
+        correctWordLabel.textColor = wordColor  // Set the color of the word label
+        
+        scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
+        guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bananas\(currentGame.incorrectGuessesRemaining)")!)
+    }
     
     func newGame() {
         let newWord = wordBank.removeFirst()
@@ -102,15 +93,32 @@ class ViewController: UIViewController {
     }
     
     func updateHangmanGame() {
-        if currentGame.incorrectGuessesRemaining == 0 {
-            losesInAll += 1
-        } else if currentGame.word == currentGame.formattedWord {
-            winsInAll += 1
+        if currentGame.isGameWon {
+            updateUI(wordColor: .green)  // Set word color to green if won
+            enableLetterButtons(false)   // Disable buttons on win
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.winsInAll += 1
+                self.newSet()             // Start a new game
+            }
+        } else if currentGame.isGameLost {
+            updateUI(wordColor: .red)  // Set word color to red if lost
+            enableLetterButtons(false)   // Disable buttons on loss
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.losesInAll += 1
+                self.newSet()             // Start a new game
+            }
         } else {
-            updateUI()
+            updateUI()  // Continue updating the UI during normal play
         }
     }
-    
+
+    func enableLetterButtons(_ enable: Bool) {
+        for button in letterButtons {
+            button.isEnabled = enable
+        }
+    }
+
+
     
     
     func applyBlurEffect1() {

@@ -51,11 +51,12 @@ class SaladViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
-            correctWordLabel.textColor = .black  // Reset text color to default
-            updateUI()  // Update UI for the new word
+            updateUI()
         } else {
-            enableLetterButtons(false)  // Disable buttons if no words are left
+            enableLetterButtons(false)
         }
+    
+
     
 
     
@@ -68,25 +69,22 @@ class SaladViewController: UIViewController {
         }
     }
     
-        func updateUI() {
-            var letters = [String]()
-            for letter in currentGame.formattedWord {
-                letters.append(String(letter))
-            }
-            let wordWithSpacing = letters.joined(separator: " ")
-            correctWordLabel.text = wordWithSpacing
-            scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
-            guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
-            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "salad\(currentGame.incorrectGuessesRemaining)")!)
-            
+    func updateUI(wordColor: UIColor = .black) {
+        var letters = [String]()
+        for letter in currentGame.formattedWord {
+            letters.append(String(letter))
         }
-    
-    func newGame() {
-        let newWord = wordBank.removeFirst()
-        currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
-        updateUI()
+        let wordWithSpacing = letters.joined(separator: " ")
+        correctWordLabel.text = wordWithSpacing
+        correctWordLabel.textColor = wordColor  // Set the color of the word label
+        
+        scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
+        guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "salad\(currentGame.incorrectGuessesRemaining)")!)
     }
-
+    
+    
 
     
 
@@ -102,33 +100,34 @@ class SaladViewController: UIViewController {
     }
     
     func updateHangmanGame() {
-        if currentGame.incorrectGuessesRemaining == 0 {
-            // Game lost - reveal the word in red
-            currentGame.isGameOver = true  // Mark game as over
-            correctWordLabel.textColor = .red
-            showCorrectWord()
-            losesInAll += 1
-            disableLetterButtons()
-            delayNewGame()
-        } else if currentGame.word == currentGame.formattedWord {
-            // Game won - reveal the word in green
-            currentGame.isGameOver = true  // Mark game as over
-            correctWordLabel.textColor = .green
-            showCorrectWord()
-            winsInAll += 1
-            disableLetterButtons()
-            
-            let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                    feedbackGenerator.impactOccurred()
-            
-            delayNewGame()
+        if currentGame.isGameWon {
+            updateUI(wordColor: .green)  // Set word color to green if won
+            enableLetterButtons(false)   // Disable buttons on win
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.winsInAll += 1
+                self.newSet()             // Start a new game
+            }
+        } else if currentGame.isGameLost {
+            updateUI(wordColor: .red)  // Set word color to red if lost
+            enableLetterButtons(false)   // Disable buttons on loss
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.losesInAll += 1
+                self.newSet()             // Start a new game
+            }
         } else {
-            updateUI()
-            
-            let feedbackGenerator = UIImpactFeedbackGenerator(style: currentGame.word.contains(currentGame.formattedWord) ? .light : .medium)
-                    feedbackGenerator.impactOccurred()
+            updateUI()  // Continue updating the UI during normal play
         }
     }
+
+    func enableLetterButtons(_ enable: Bool) {
+        for button in letterButtons {
+            button.isEnabled = enable
+        }
+    }
+
+
+
+
 
 
     func showCorrectWord() {

@@ -20,7 +20,7 @@ class CharcuterieViewController: UIViewController {
     @IBOutlet weak var letterStack: UIStackView!
     
     
-    var wordBank = ["PROSCIUTTO", "SALAMI", "CAPICOLA", "CHORIZO”, ”BRESAOLA", "PEPPERONI", "TURKEY", "HAM", "LIVERWURST", "SERRANO", "COPPA", "SMOKEDTURKEY", "BACONJAM", "CANDIEDBACON", "CHEESE", "CHEDDAR", "GORGONZOLA", "BLUECHEESE", "HAVARTI", "PARMESAN", "SWISS", "CREAMCHEESE", "RICOTTA", "FETA", "PEPPERJACK", "OLIVES", "ARTICHOKES", "NUTS", "FRUIT", "HONEY", "JAM", "CRACKERS", "JELLY", "BRIE", "ALMONDS", "WALNUTS", "PECANS", "CASHEWS", "PISTACHIOS", "HAZELNUTS", "MACADAMIA", "CHESTNUTS", "FETA", "GRAPES", "BERRIES", "PRETZELS", "CUCUMBER", "RASPBERRY", "BLACKBERRY", "BLUEBERRY", "STRAWBERRY", "CAVIAR", "CARROT", "CELERY"]
+    var wordBank = ["PROSCIUTTO", "SALAMI", "CAPICOLA", "CHORIZO”, ”BRESAOLA", "PEPPERONI", "TURKEY", "HAM", "LIVERWURST", "SERRANO", "COPPA", "TURKEY", "JAM", "BACON", "CHEESE", "CHEDDAR", "GORGONZOLA", "BLUECHEESE", "HAVARTI", "PARMESAN", "SWISS", "CREAMCHEESE", "RICOTTA", "FETA", "PEPPERJACK", "OLIVES", "ARTICHOKES", "NUTS", "FRUIT", "HONEY", "JAM", "CRACKERS", "JELLY", "BRIE", "ALMONDS", "WALNUTS", "PECANS", "CASHEWS", "PISTACHIOS", "HAZELNUTS", "MACADAMIA", "CHESTNUTS", "FETA", "GRAPES", "BERRIES", "PRETZELS", "CUCUMBER", "RASPBERRY", "BLACKBERRY", "BLUEBERRY", "STRAWBERRY", "CAVIAR", "CARROT", "CELERY"]
     
     let incorrectLettersTolerated = 8
     
@@ -54,7 +54,7 @@ class CharcuterieViewController: UIViewController {
     }
         var currentGame: Hangman!
         
-    func newSet () {
+    func newSet() {
         if !wordBank.isEmpty {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
@@ -63,6 +63,7 @@ class CharcuterieViewController: UIViewController {
         } else {
             enableLetterButtons(false)
         }
+    
         
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
@@ -70,19 +71,20 @@ class CharcuterieViewController: UIViewController {
             }
         }
     }
-    
-        func updateUI() {
-            var letters = [String]()
-            for letter in currentGame.formattedWord {
-                letters.append(String(letter))
-            }
-            let wordWithSpacing = letters.joined(separator: " ")
-            correctWordLabel.text = wordWithSpacing
-            scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
-            guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
-            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "charcuterie\(currentGame.incorrectGuessesRemaining)")!)
-            
+    func updateUI(wordColor: UIColor = .black) {
+        var letters = [String]()
+        for letter in currentGame.formattedWord {
+            letters.append(String(letter))
         }
+        let wordWithSpacing = letters.joined(separator: " ")
+        correctWordLabel.text = wordWithSpacing
+        correctWordLabel.textColor = wordColor  // Set the color of the word label
+        
+        scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
+        guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "charcuterie\(currentGame.incorrectGuessesRemaining)")!)
+    }
     
     func newGame() {
         let newWord = wordBank.removeFirst()
@@ -102,14 +104,31 @@ class CharcuterieViewController: UIViewController {
     }
     
     func updateHangmanGame() {
-        if currentGame.incorrectGuessesRemaining == 0 {
-            losesInAll += 1
-        } else if currentGame.word == currentGame.formattedWord {
-            winsInAll += 1
+        if currentGame.isGameWon {
+            updateUI(wordColor: .green)  // Set word color to green if won
+            enableLetterButtons(false)   // Disable buttons on win
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.winsInAll += 1
+                self.newSet()             // Start a new game
+            }
+        } else if currentGame.isGameLost {
+            updateUI(wordColor: .red)  // Set word color to red if lost
+            enableLetterButtons(false)   // Disable buttons on loss
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.losesInAll += 1
+                self.newSet()             // Start a new game
+            }
         } else {
-            updateUI()
+            updateUI()  // Continue updating the UI during normal play
         }
     }
+
+    func enableLetterButtons(_ enable: Bool) {
+        for button in letterButtons {
+            button.isEnabled = enable
+        }
+    }
+
     
     
     
