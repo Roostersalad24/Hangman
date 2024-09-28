@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import QuartzCore
 
 class MainMenuViewController: UIViewController {
 
+    @IBOutlet weak var cuttingBoard: UIButton!
+    
     @IBOutlet weak var scroll: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        cuttingBoard.titleLabel?.shadowColor = .black
+        cuttingBoard.titleLabel?.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        cuttingBoard.subtitleLabel?.shadowColor = .black
+        cuttingBoard.subtitleLabel?.shadowOffset = CGSize(width: 2.0, height: 2.0)
         // Do any additional setup after loading the view.
     }
     

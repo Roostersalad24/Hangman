@@ -41,9 +41,35 @@ class BroccoliViewController: UIViewController {
         super.viewDidLoad()
         newSet()
         applyBlurEffect1()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "broccoli8.pdf")!)
+        setBackgroundImage(named: "broccoli8.pdf")
     }
         var currentGame: Hangman!
+    
+    func setBackgroundImage(named imageName: String) {
+        // Remove the previous background image view if it exists
+        if let existingBackground = view.subviews.first(where: { $0 is UIImageView }) {
+            existingBackground.removeFromSuperview()
+        }
+
+        // Create and add a new UIImageView with the updated image
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: imageName)
+        backgroundImage.contentMode = .scaleAspectFit  // Aspect Fit
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+
+        // Add the image view as a subview and send it to the back
+        self.view.addSubview(backgroundImage)
+        self.view.sendSubviewToBack(backgroundImage)
+
+        // Constraints to pin the image view to the edges of the screen
+        NSLayoutConstraint.activate([
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
         
     func newSet() {
         if !wordBank.isEmpty {
@@ -63,20 +89,22 @@ class BroccoliViewController: UIViewController {
         }
     }
     
-        func updateUI(wordColor: UIColor = .black) {
-            var letters = [String]()
-            for letter in currentGame.formattedWord {
-                letters.append(String(letter))
-            }
-            let wordWithSpacing = letters.joined(separator: " ")
-            correctWordLabel.text = wordWithSpacing
-            correctWordLabel.textColor = wordColor  // Set the color of the word label
-            
-            scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
-            guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
-            
-            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "broccoli\(currentGame.incorrectGuessesRemaining)")!)
+    func updateUI(wordColor: UIColor = .black) {
+        var letters = [String]()
+        for letter in currentGame.formattedWord {
+            letters.append(String(letter))
         }
+        let wordWithSpacing = letters.joined(separator: " ")
+        correctWordLabel.text = wordWithSpacing
+        correctWordLabel.textColor = wordColor  // Set the color of the word label
+
+        scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
+        guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
+
+        // Update background image based on incorrect guesses remaining
+        setBackgroundImage(named: "broccoli\(currentGame.incorrectGuessesRemaining)")
+    }
+
     
     func newGame() {
         let newWord = wordBank.removeFirst()

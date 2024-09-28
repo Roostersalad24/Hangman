@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "cheesebutton.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

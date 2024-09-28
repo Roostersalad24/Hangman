@@ -1,5 +1,5 @@
 //
-//  PizzaViewController.swift
+//  CharcuterieViewController.swift
 //  Hangman
 //
 //  Created by Andrew Johnson on 9/11/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PizzaViewController: UIViewController {
+class CheeseViewController: UIViewController {
 
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -20,7 +20,7 @@ class PizzaViewController: UIViewController {
     @IBOutlet weak var letterStack: UIStackView!
     
     
-    var wordBank = ["PEPPERONI", "SAUSAGE", "BACON", "HAM", "CHICKEN", "BEEF",  "ANCHOVIES", "TUNA", "SALAMI", "MUSHROOMS", "ONIONS", "GARLIC", "BELLPEPPER", "SPINACH", "OLIVES", "TOMATO", "JALAPENO", "PINEAPPLE", "ARTICHOKE", "BASIL", "OREGANO", "PARMESAN", "MOZZARELLA", "CHEDDAR", "FETA", "RICOTTA", "PROVOLONE", "ASIAGO", "GORGONZOLA", "ZUCCHINI", "EGGPLANT", "CORN", "ARUGULA", "CAPERS", "PROSCIUTTO", "PANCETTA", "PESTO", "CHORIZO", "ROSEMARY"]
+    var wordBank = ["CHEDDAR", "BRIE", "GOUDA", "MOZZARELLA", "PARMESAN", "FETA", "HAVARTI", "SWISS", "GORGONZOLA", "ROQUEFORT", "CAMEMBERT", "RICOTTA", "ASIAGO", "GRUYERE", "COTTAGE", "EMMENTAL", "PROVOLONE", "MONTEREY", "MASCARPONE", "BURRATA", "LIMBURGER", "JARLSBERG", "QUESO", "COLBY", "ROMANO", "CHEVRE", "RICOTTA", "AMERICAN", "BLUE", "MUENSTER", "COLBY"]
     
     let incorrectLettersTolerated = 8
     
@@ -41,13 +41,10 @@ class PizzaViewController: UIViewController {
         super.viewDidLoad()
         newSet()
         applyBlurEffect1()
-        
-        
-
-        setBackgroundImage(named: "pizza8.pdf")
-        }
-
-        // Helper function to set the background image with Aspect Fit
+        setBackgroundImage(named: "cheese8.pdf")
+    }
+        var currentGame: Hangman!
+    
     func setBackgroundImage(named imageName: String) {
         // Remove the previous background image view if it exists
         if let existingBackground = view.subviews.first(where: { $0 is UIImageView }) {
@@ -73,8 +70,6 @@ class PizzaViewController: UIViewController {
         ])
     }
 
-    
-        var currentGame: Hangman!
         
     func newSet() {
         if !wordBank.isEmpty {
@@ -86,6 +81,7 @@ class PizzaViewController: UIViewController {
             enableLetterButtons(false)
         }
     
+        
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
                 button.isEnabled = enable
@@ -106,7 +102,7 @@ class PizzaViewController: UIViewController {
         guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
 
         // Update background image based on incorrect guesses remaining
-        setBackgroundImage(named: "pizza\(currentGame.incorrectGuessesRemaining)")
+        setBackgroundImage(named: "cheese\(currentGame.incorrectGuessesRemaining)")
     }
 
     
@@ -153,9 +149,7 @@ class PizzaViewController: UIViewController {
         }
     }
 
-
-
-
+    
     
     
     func applyBlurEffect1() {
