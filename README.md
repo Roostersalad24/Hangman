@@ -5,7 +5,7 @@ Alphabet Appetizers
 A food themed hangman game targeted to children over the age of five. The goal is to provide a fun and educational experience for children to learn more about cooking food and what ingredients go in different dishes. Colorful images draw the eye, while the word bank provides a tailored ingredients to the particular view controller selected. For instance a view controller themed around ice cream has a vector image of an ice cream sundae that slowly loses scoops of ice cream with incorrect guesses to give visual feedback to the user. Upon winning or losing the current round, the text will highlight in a green or red color respectively to show the user the completed word and wether it was guessed correctly. The next round starts after a short delay and continues through an extensive word bank for each view controller. 
 
 ### Technology Used
-* Xcode 16
+- Xcode 16
 - Swift 5
 - Uikit
 
