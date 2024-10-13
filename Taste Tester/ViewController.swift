@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var guesses: UILabel!
     
-
+    @IBOutlet weak var hintButton: UIButton!
+    
     @IBOutlet weak var correctWordLabel: UILabel!
     
     @IBOutlet weak var scoreLabel: UILabel!
@@ -79,12 +80,41 @@ class ViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
     }
+    
+    func disableGuessedLetterButtons() {
+            // Loop through each letter button and disable it if it's been guessed
+            for button in letterButtons {
+                if let letterString = button.configuration?.title, let letter = letterString.first {
+                    // If the letter is already in guessedLetters, disable the button
+                    if currentGame.guessedLetters.contains(letter) {
+                        button.isEnabled = false
+                    }
+                }
+            }
+        }
 
+    
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+
+               // If there are unguessed letters left, reveal one
+               if let randomLetter = unguessedLetters.randomElement() {
+                   currentGame.guessedLetters.append(randomLetter)
+                   updateUI() // Update the word display with the newly revealed letter
+                   disableGuessedLetterButtons() // Disable the button for the revealed letter
+               }
+
+               sender.isEnabled = false // Disable the hint button after it's used
+           }
+    
+    
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -124,20 +154,33 @@ class ViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+           
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
-            updateUI()  
+            updateUI()
         }
+    }
+
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            
+            self.setBackgroundImage(named: "icecream8.pdf")
+        }, completion: nil)
     }
 
     func enableLetterButtons(_ enable: Bool) {

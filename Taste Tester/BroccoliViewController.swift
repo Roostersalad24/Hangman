@@ -21,6 +21,9 @@ class BroccoliViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    
+    @IBOutlet weak var hintButton: UIButton!
+    
     var wordBank = ["CHICKEN", "BEEF", "PORK", "FISH", "VEGETABLES", "CARROT", "CELERY", "ONION", "GARLIC", "GINGER", "POTATO", "TOMATO", "CABBAGE", "SPINACH", "BROCCOLI", "PEAS", "LENTILS", "RICE", "NOODLES", "CORN", "MUSHROOM", "BEANS", "HERBS", "THYME", "BAYLEAF", "BASIL", "OREGANO", "CHILI", "CUMIN", "SALT", "PEPPER", "LEMON", "LIME", "VINEGAR", "CREAM", "BROTH", "STOCK", "SOURCREAM", "PARSLEY", "DILL", "CILANTRO", "ZUCCHINI", "SCALLIONS", "RADISH","SHRIMP", "CLAMS", "CRAB", "HOMINY", "BARLEY", "QUINOA", "FENNEL", "LEEK", "BACON", "TURNIP", "CELERY", "BELL PEPPER", "LIME JUICE", "RED PEPPER", "COCONUT MILK", "BEEF BROTH", "BONE BROTH", "SESAME OIL", "TOMATO PASTE", "CHILI POWDER", "RED LENTILS", "KIDNEY BEANS", "WHIPPING CREAM", "SPLIT PEAS", "SHRIMP", "BEAN SPROUTS"]
     
     let incorrectLettersTolerated = 8
@@ -77,18 +80,20 @@ class BroccoliViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
-    
+    }
         
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
                 button.isEnabled = enable
             }
         }
-    }
+    
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -106,6 +111,16 @@ class BroccoliViewController: UIViewController {
         setBackgroundImage(named: "broccoli\(currentGame.incorrectGuessesRemaining)")
     }
 
+    func disableGuessedLetterButtons() {
+            for button in letterButtons {
+                if let letterString = button.configuration?.title, let letter = letterString.first {
+                    if currentGame.guessedLetters.contains(letter) {
+                        button.isEnabled = false
+                    }
+                }
+            }
+        }
+
     
     func newGame() {
         let newWord = wordBank.removeFirst()
@@ -114,6 +129,15 @@ class BroccoliViewController: UIViewController {
     }
 
 
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+               if let randomLetter = unguessedLetters.randomElement() {
+                   currentGame.guessedLetters.append(randomLetter)
+                   updateUI()
+                   disableGuessedLetterButtons()
+               }
+               sender.isEnabled = false
+    }
     
 
     @IBAction func letterButtonPressed(_ sender: UIButton) {
@@ -128,27 +152,37 @@ class BroccoliViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+        
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
             updateUI()
         }
     }
-    
-    func enableLetterButtons(_ enable: Bool) {
-        for button in letterButtons {
-            button.isEnabled = enable
-        }
+
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+          
+            self.setBackgroundImage(named: "broccoli8.pdf") 
+        }, completion: nil)
     }
+
+    
+   
 
     
     

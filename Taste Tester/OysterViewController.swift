@@ -19,6 +19,7 @@ class OysterViewController: UIViewController {
     
     @IBOutlet weak var letterStack: UIStackView!
     
+    @IBOutlet weak var hintButton: UIButton!
     
     var wordBank = ["SHRIMP", "CRAB", "LOBSTER", "OYSTER", "CLAM", "MUSSEL", "SCALLOP", "CRAWFISH", "PRAWN", "BARNACLE", "SEA URCHIN", "SALMON", "TUNA", "TILAPIA", "HALIBUT", "COD", "MACKEREL", "SWORDFISH", "TROUT", "SNAPPER", "BASS", "HADDOCK", "SARDINES", "HERRING", "MAHI MAHI", "GROUPER", "FLOUNDER", "ANCHOVY", "CATFISH", "YELLOWTAIL", "PERCH", "POLLACK", "EEL", "HALIBUT", "CRAWDAD", "SQUID", "OCTOPUS", "CARP"]
     
@@ -72,6 +73,27 @@ class OysterViewController: UIViewController {
         ])
     }
 
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+                if let randomLetter = unguessedLetters.randomElement() {
+                    currentGame.guessedLetters.append(randomLetter)
+                    updateUI() // Update display with the revealed letter
+                    disableGuessedLetterButtons() // Disable guessed letters
+                }
+                sender.isEnabled = false // Disable hint button after it's used
+            }
+    
+    func disableGuessedLetterButtons() {
+            // Loop through each letter button and disable it if it's been guessed
+            for button in letterButtons {
+                if let letterString = button.configuration?.title, let letter = letterString.first {
+                    // If the letter is already in guessedLetters, disable the button
+                    if currentGame.guessedLetters.contains(letter) {
+                        button.isEnabled = false
+                    }
+                }
+            }
+        }
     
         var currentGame: Hangman!
         
@@ -80,17 +102,21 @@ class OysterViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
+    }
     
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
                 button.isEnabled = enable
             }
         }
-    }
+    
+        
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -130,15 +156,21 @@ class OysterViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
@@ -146,11 +178,15 @@ class OysterViewController: UIViewController {
         }
     }
 
-    func enableLetterButtons(_ enable: Bool) {
-        for button in letterButtons {
-            button.isEnabled = enable
-        }
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            
+            self.setBackgroundImage(named: "oysters8.pdf") 
+        }, completion: nil)
     }
+
+
+
 
 
 

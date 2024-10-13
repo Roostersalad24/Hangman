@@ -19,6 +19,7 @@ class PizzaViewController: UIViewController {
     
     @IBOutlet weak var letterStack: UIStackView!
     
+    @IBOutlet weak var hintButton: UIButton!
     
     var wordBank = ["PEPPERONI", "SAUSAGE", "BACON", "HAM", "CHICKEN", "BEEF",  "ANCHOVIES", "TUNA", "SALAMI", "MUSHROOMS", "ONIONS", "GARLIC", "SPINACH", "OLIVES", "TOMATO", "JALAPENO", "PINEAPPLE", "ARTICHOKE", "BASIL", "OREGANO", "PARMESAN", "MOZZARELLA", "CHEDDAR", "FETA", "RICOTTA", "PROVOLONE", "ASIAGO", "GORGONZOLA", "ZUCCHINI", "EGGPLANT", "CORN", "ARUGULA", "CAPERS", "PROSCIUTTO", "PANCETTA", "PESTO", "CHORIZO", "ROSEMARY", "ALFREDO SAUCE", "PIZZA SAUCE", "BELL PEPPERS", "SUNDRIED TOMATOES", "ITALIAN SAUSAGE", "PEPERONCINO", "BLACK OLIVES"]
     
@@ -80,17 +81,19 @@ class PizzaViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
-    
+    }
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
                 button.isEnabled = enable
             }
         }
-    }
+    
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -107,6 +110,16 @@ class PizzaViewController: UIViewController {
        
         setBackgroundImage(named: "pizza\(currentGame.incorrectGuessesRemaining)")
     }
+    
+    func disableGuessedLetterButtons() {
+            for button in letterButtons {
+                if let letterString = button.configuration?.title, let letter = letterString.first {
+                    if currentGame.guessedLetters.contains(letter) {
+                        button.isEnabled = false
+                    }
+                }
+            }
+        }
 
     
     func newGame() {
@@ -116,6 +129,15 @@ class PizzaViewController: UIViewController {
     }
 
 
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+               if let randomLetter = unguessedLetters.randomElement() {
+                   currentGame.guessedLetters.append(randomLetter)
+                   updateUI()
+                   disableGuessedLetterButtons()
+               }
+               sender.isEnabled = false 
+    }
     
 
     @IBAction func letterButtonPressed(_ sender: UIButton) {
@@ -130,27 +152,37 @@ class PizzaViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
-            updateUI()  
+            updateUI()
         }
     }
 
-    func enableLetterButtons(_ enable: Bool) {
-        for button in letterButtons {
-            button.isEnabled = enable
-        }
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            
+            self.setBackgroundImage(named: "pizza8.pdf")
+        }, completion: nil)
     }
+
+
+   
 
 
 

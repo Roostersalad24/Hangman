@@ -12,22 +12,22 @@ struct Hangman {
     var incorrectGuessesRemaining: Int
     var guessedLetters: [Character]
     
-    // Computed property to check if the game is won
+   
     var isGameWon: Bool {
         return word == formattedWordWithoutCheckingGameOver
     }
     
-    // Computed property to check if the game is lost
+   
     var isGameLost: Bool {
         return incorrectGuessesRemaining == 0
     }
     
-    // Format the word with underscores for unguessed letters
+   
     var formattedWordWithoutCheckingGameOver: String {
         var guessedWord = ""
         for letter in word {
             if letter == " " {
-                guessedWord += " "  // Preserve spaces in the word
+                guessedWord += " "  
             } else if guessedLetters.contains(letter) {
                 guessedWord += "\(letter)"
             } else {
@@ -38,7 +38,7 @@ struct Hangman {
     }
 
     
-    // If the game is over (won or lost), reveal the word
+  
     var formattedWord: String {
         if isGameWon || isGameLost {
             return word
@@ -47,24 +47,24 @@ struct Hangman {
         }
     }
     
-    // Initialize the game with the first letter revealed
+  
     init(word: String, incorrectGuessesRemaining: Int, guessedLetters: [Character]) {
         self.word = word
         self.incorrectGuessesRemaining = incorrectGuessesRemaining
         self.guessedLetters = guessedLetters
 
-        // Automatically reveal the first letter of the word and any spaces
+   
         for letter in word {
             if letter == " " {
-                self.guessedLetters.append(letter)  // Add space as guessed
+                self.guessedLetters.append(letter)
             } else if self.guessedLetters.isEmpty {
-                self.guessedLetters.append(letter)  // Add the first letter of the word
+                self.guessedLetters.append(letter)
             }
         }
     }
 
     
-    // Updates the game state when a letter is guessed
+   
     mutating func playerGuessed(letter: Character) {
         if !guessedLetters.contains(letter) {
             guessedLetters.append(letter)

@@ -19,6 +19,7 @@ class SushiViewController: UIViewController {
     
     @IBOutlet weak var letterStack: UIStackView!
     
+    @IBOutlet weak var hintButton: UIButton!
     
     var wordBank = ["RICE", "SEAWEED", "SALMON", "TUNA", "EEL", "CRAB", "SHRIMP", "OCTOPUS", "SQUID", "AVOCADO", "CUCUMBER", "CARROT", "RADISH", "TOFU", "JALAPENO", "MANGO", "SCALLIONS", "CILANTRO", "YELLOWTAIL", "CAVIAR", "TEMPURA", "CHIVES", "EGG", "FISH", "CHIVES", "GINGER", "WASABI", "NORI", "MAYO", "URCHIN", "SESAME SEEDS", "SOY SAUCE", "EEL SAUCE", "SPICY MAYO", "BAMBOO SHOOTS", "RICE VINEGAR"]
 
@@ -80,11 +81,23 @@ class SushiViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
+    }
     
+    func disableGuessedLetterButtons() {
+            for button in letterButtons {
+                if let letterString = button.configuration?.title, let letter = letterString.first {
+                    if currentGame.guessedLetters.contains(letter) {
+                        button.isEnabled = false
+                    }
+                }
+            }
+        }
 
         
         func enableLetterButtons(_ enable: Bool) {
@@ -92,7 +105,7 @@ class SushiViewController: UIViewController {
                 button.isEnabled = enable
             }
         }
-    }
+    
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -109,6 +122,7 @@ class SushiViewController: UIViewController {
         
         setBackgroundImage(named: "sushi\(currentGame.incorrectGuessesRemaining)")
     }
+        
 
     
     func newGame() {
@@ -118,6 +132,16 @@ class SushiViewController: UIViewController {
     }
 
 
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+                if let randomLetter = unguessedLetters.randomElement() {
+                    currentGame.guessedLetters.append(randomLetter)
+                    updateUI()
+                    disableGuessedLetterButtons()
+                }
+                sender.isEnabled = false 
+        
+    }
     
 
     @IBAction func letterButtonPressed(_ sender: UIButton) {
@@ -132,27 +156,37 @@ class SushiViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+          
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
-            updateUI()  
+            updateUI()
         }
     }
 
-    func enableLetterButtons(_ enable: Bool) {
-        for button in letterButtons {
-            button.isEnabled = enable
-        }
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            
+            self.setBackgroundImage(named: "sushi8.pdf") 
+        }, completion: nil)
     }
+
+
+  
 
     
     

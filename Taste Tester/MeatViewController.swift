@@ -20,8 +20,9 @@ class MeatViewController: UIViewController {
     
     @IBOutlet weak var letterStack: UIStackView!
     
+    @IBOutlet weak var hintButton: UIButton!
     
-    var wordBank = ["RIBEYE", "TBONE", "PORTERHOUSE", "SIRLOIN", "FLAT IRON", "FLANK", "SKIRT", "HANGER", "TOMAHAWK", "DENVER", "TRI-TIP", "CHUCK EYE", "RUMP", "LONDON BROIL", "SHORT RIBS", "PRIME RIB", "BRISKET", "CHUCK ROAST", "SHORT LOIN", "OXTAIL", "FLANK"]
+    var wordBank = ["RIBEYE", "TBONE", "PORTERHOUSE", "SIRLOIN", "FLAT IRON", "FLANK", "SKIRT STEAK", "HANGER", "TOMAHAWK", "DENVER STEAK", "TRI TIP", "CHUCK EYE", "RUMP ROAST", "LONDON BROIL", "SHORT RIBS", "PRIME RIB", "BRISKET", "CHUCK ROAST", "SHORT LOIN", "OXTAIL", "FLANK", "BABY BACK RIBS", "FLAT IRON", "PORK BELLY", "PORK CHOP", "PORK SHOULDER", "BEEF RIBS", "TOP ROUND", "BOTTOM ROUND", "NEW YORK STRIP", "FILET MIGNON", "PORK LOIN", "LAMB CHOP"]
     
     let incorrectLettersTolerated = 8
     
@@ -81,17 +82,32 @@ class MeatViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
+    }
     
+        func disableGuessedLetterButtons() {
+               // Loop through each letter button and disable it if it's been guessed
+               for button in letterButtons {
+                   if let letterString = button.configuration?.title, let letter = letterString.first {
+                       // If the letter is already in guessedLetters, disable the button
+                       if currentGame.guessedLetters.contains(letter) {
+                           button.isEnabled = false
+                       }
+                   }
+               }
+           }
+
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
                 button.isEnabled = enable
             }
         }
-    }
+    
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -117,6 +133,21 @@ class MeatViewController: UIViewController {
     }
 
 
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        // Find a letter that hasn't been guessed yet
+                let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+
+                // If there are unguessed letters left, reveal one
+                if let randomLetter = unguessedLetters.randomElement() {
+                    currentGame.guessedLetters.append(randomLetter)
+                    updateUI() // Update the word display with the newly revealed letter
+                    disableGuessedLetterButtons() // Disable the button for the revealed letter
+                }
+
+                // Disable the hint button after it's used (optional: single-use hint)
+                sender.isEnabled = false
+            
+    }
     
 
     @IBAction func letterButtonPressed(_ sender: UIButton) {
@@ -131,15 +162,21 @@ class MeatViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
@@ -147,11 +184,15 @@ class MeatViewController: UIViewController {
         }
     }
 
-    func enableLetterButtons(_ enable: Bool) {
-        for button in letterButtons {
-            button.isEnabled = enable
-        }
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            
+            self.setBackgroundImage(named: "brisket8.pdf")
+        }, completion: nil)
     }
+
+
+  
 
 
 

@@ -19,6 +19,7 @@ class BreakfastViewController: UIViewController {
     
     @IBOutlet weak var letterStack: UIStackView!
     
+    @IBOutlet weak var hintButton: UIButton!
     
     var wordBank = ["PANCAKES", "WAFFLES", "FRENCH TOAST", "SCRAMBLED EGGS", "OMELETTE", "BACON", "SAUSAGE", "HASH BROWNS", "BAGEL", "CROISSANT", "CEREAL", "OATMEAL", "GRANOLA", "SMOOTHIE", "MUFFIN", "TOAST", "ENGLISH MUFFIN", "SCONES", "BISCUITS", "QUICHE", "YOGURT", "AVOCADO TOAST", "CREPES", "FRUIT SALAD", "DOUGHNUT", "FRITTATA", "GRITS", "PORRIDGE", "DANISH", "EGG BENEDICT", "POPTARTS", "CINNAMON ROLL", "CORNED BEEF", "PROTEIN BAR", "BANANA BREAD", "OATS", "COTTAGE CHEESE"]
     
@@ -80,17 +81,19 @@ class BreakfastViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
+    }
     
         func enableLetterButtons(_ enable: Bool) {
             for button in letterButtons {
                 button.isEnabled = enable
             }
         }
-    }
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -99,7 +102,7 @@ class BreakfastViewController: UIViewController {
         }
         let wordWithSpacing = letters.joined(separator: " ")
         correctWordLabel.text = wordWithSpacing
-        correctWordLabel.textColor = wordColor  // Set the color of the word label
+        correctWordLabel.textColor = wordColor  
 
         scoreLabel.text = "Wins: \(winsInAll), Losses: \(losesInAll)"
         guesses.text = "Guesses Left: \(currentGame.incorrectGuessesRemaining)"
@@ -107,6 +110,16 @@ class BreakfastViewController: UIViewController {
        
         setBackgroundImage(named: "eggs\(currentGame.incorrectGuessesRemaining)")
     }
+   
+    func disableGuessedLetterButtons() {
+            for button in letterButtons {
+                if let letterString = button.configuration?.title, let letter = letterString.first {
+                    if currentGame.guessedLetters.contains(letter) {
+                        button.isEnabled = false
+                    }
+                }
+            }
+        }
 
     
     func newGame() {
@@ -116,6 +129,16 @@ class BreakfastViewController: UIViewController {
     }
 
 
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+                if let randomLetter = unguessedLetters.randomElement() {
+                    currentGame.guessedLetters.append(randomLetter)
+                    updateUI()
+                    disableGuessedLetterButtons()
+                }
+                sender.isEnabled = false
+            }
+    
     
 
     @IBAction func letterButtonPressed(_ sender: UIButton) {
@@ -130,15 +153,21 @@ class BreakfastViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+           
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
+           
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
@@ -146,11 +175,13 @@ class BreakfastViewController: UIViewController {
         }
     }
 
-    func enableLetterButtons(_ enable: Bool) {
-        for button in letterButtons {
-            button.isEnabled = enable
-        }
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.setBackgroundImage(named: "eggs8.pdf")
+        }, completion: nil)
     }
+
+
 
 
 

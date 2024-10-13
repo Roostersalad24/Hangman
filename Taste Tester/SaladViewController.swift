@@ -20,6 +20,7 @@ class SaladViewController: UIViewController {
     
     @IBOutlet weak var letterStack: UIStackView!
     
+    @IBOutlet weak var hintButton: UIButton!
     
     var wordBank = ["LETTUCE", "TOMATO", "CUCUMBER", "CARROT", "ONION", "BELLPEPPER", "SPINACH", "KALE", "ARUGULA", "AVOCADO", "CHICKEN", "TUNA", "FETA", "OLIVES", "EGG", "BACON", "CROUTON", "CHEESE", "PINEAPPLE", "STRAWBERRY", "ALMONDS", "WALNUTS", "PECAN", "CHICKPEA", "QUINOA", "FARRO", "MUSHROOM", "BEETS", "ARTICHOKE", "ZUCCHINI", "RADISH", "BROCCOLI", "CAULIFLOWER", "PEAR", "APPLE", "CRANBERRY", "BLUEBERRIES", "POMEGRANATE", "ORANGE", "CORN", "EDAMAME", "TOFU", "RICE", "BARLEY", "COUSCOUS", "HUMMUS", "GARBANZO", "PARMESAN", "ROMAINE", "DILL", "CILANTRO", "CAPERS", "CHAI", "VINEGAR", "GARLIC", "BASIL", "CHERRY TOMATOES", "BOILED EGG", "SUNFLOWER SEEDS", "RANCH DRESSING", "MANDARIN ORANGES", "ITALIAN DRESSING", "SOUR CREAM", "GREEN OLIVES", "BLACK BEANS", "ARTICHOKE HEARTS", "BOK CHOY", "FRESH MOZZARELLA", "SMOKED SALMON", "GREEN BEANS", "LIME JUICE"]
     
@@ -77,13 +78,23 @@ class SaladViewController: UIViewController {
             let newWord = wordBank.randomElement()!
             currentGame = Hangman(word: newWord, incorrectGuessesRemaining: incorrectLettersTolerated, guessedLetters: [])
             enableLetterButtons(true)
+            disableGuessedLetterButtons()
             updateUI()
+            hintButton.isEnabled = true
         } else {
             enableLetterButtons(false)
         }
-    
+    }
 
-    
+    func disableGuessedLetterButtons() {
+            for button in letterButtons {
+                if let letterString = button.configuration?.title, let letter = letterString.first {
+                    if currentGame.guessedLetters.contains(letter) {
+                        button.isEnabled = false
+                    }
+                }
+            }
+        }
 
     
 
@@ -93,7 +104,7 @@ class SaladViewController: UIViewController {
                 button.isEnabled = enable
             }
         }
-    }
+    
     
     func updateUI(wordColor: UIColor = .black) {
         var letters = [String]()
@@ -113,6 +124,16 @@ class SaladViewController: UIViewController {
 
     
 
+    @IBAction func hintButtonPressed(_ sender: UIButton) {
+        let unguessedLetters = currentGame.word.filter { !currentGame.guessedLetters.contains($0) && $0 != " " }
+                if let randomLetter = unguessedLetters.randomElement() {
+                    currentGame.guessedLetters.append(randomLetter)
+                    updateUI()
+                    disableGuessedLetterButtons()
+                }
+                sender.isEnabled = false
+            }
+    
     
 
     @IBAction func letterButtonPressed(_ sender: UIButton) {
@@ -130,15 +151,20 @@ class SaladViewController: UIViewController {
         if currentGame.isGameWon {
             updateUI(wordColor: .green)
             enableLetterButtons(false)
+            
+         
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.winsInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else if currentGame.isGameLost {
             updateUI(wordColor: .red)
             enableLetterButtons(false)
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.losesInAll += 1
+                self.animateBackgroundToOriginal()
                 self.newSet()
             }
         } else {
@@ -146,11 +172,14 @@ class SaladViewController: UIViewController {
         }
     }
 
-    func enableLetterButtons(_ enable: Bool) {
-        for button in letterButtons {
-            button.isEnabled = enable
-        }
+    func animateBackgroundToOriginal() {
+        UIView.transition(with: self.view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            
+            self.setBackgroundImage(named: "salad8.pdf")
+        }, completion: nil)
     }
+
+    
 
 
 

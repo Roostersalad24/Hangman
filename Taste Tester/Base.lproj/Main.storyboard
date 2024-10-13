@@ -9,6 +9,59 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Rules View Controller-->
+        <scene sceneID="CTZ-5m-H6r">
+            <objects>
+                <viewController id="fYA-Sz-QAs" customClass="RulesViewController" customModule="Taste_Tester" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Psp-3d-Whg">
+                        <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYp-4i-hug">
+                                <rect key="frame" x="202" y="20" width="416" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="How to Play" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wW-Hk-LNR">
+                                <rect key="frame" x="30" y="20" width="104" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Back" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="MKy-4i-LbH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="snE-xJ-PY4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pYp-4i-hug" firstAttribute="top" secondItem="snE-xJ-PY4" secondAttribute="top" constant="20" id="LSy-wY-L2D"/>
+                            <constraint firstItem="snE-xJ-PY4" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pYp-4i-hug" secondAttribute="trailing" symbolic="YES" id="byw-fc-z8m"/>
+                            <constraint firstItem="4wW-Hk-LNR" firstAttribute="top" secondItem="snE-xJ-PY4" secondAttribute="top" constant="20" id="cPY-KN-9kp"/>
+                            <constraint firstItem="pYp-4i-hug" firstAttribute="leading" secondItem="snE-xJ-PY4" secondAttribute="leading" constant="202" id="fa2-nM-P8C"/>
+                            <constraint firstItem="4wW-Hk-LNR" firstAttribute="leading" secondItem="snE-xJ-PY4" secondAttribute="leading" constant="30" id="lfh-Oa-qwv"/>
+                            <constraint firstItem="pYp-4i-hug" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4wW-Hk-LNR" secondAttribute="trailing" constant="8" symbolic="YES" id="w8l-jq-fAe"/>
+                            <constraint firstItem="pYp-4i-hug" firstAttribute="centerX" secondItem="Psp-3d-Whg" secondAttribute="centerX" id="xyZ-8P-hrq"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cHM-43-MlZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3013" y="-1291"/>
+        </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="EHe-dm-oYj">
             <objects>
@@ -23,7 +76,7 @@
                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="lGq-l0-8CG">
                                         <rect key="frame" x="0.0" y="16" width="820" height="3880"/>
                                         <subviews>
-                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0X-sb-kFu">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0X-sb-kFu">
                                                 <rect key="frame" x="0.0" y="0.0" width="820" height="350"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,6 +87,9 @@
                                                         <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </backgroundConfiguration>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <segue destination="fYA-Sz-QAs" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="4Ip-tk-Bjd"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="747" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4K-h7-S3m">
                                                 <rect key="frame" x="0.0" y="353" width="820" height="350"/>
@@ -771,15 +827,35 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="XA5-B3-q3w"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nck-az-hkB">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aKi-YW-G0H"/>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="fo0-co-DDu"/>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="ke4-qC-WI1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="MSh-vi-pzP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="5g7-uX-JJZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MSh-vi-pzP" secondAttribute="bottom" id="Aff-Vw-bBS"/>
+                            <constraint firstItem="nck-az-hkB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="C2A-Ts-Y6v"/>
                             <constraint firstAttribute="trailing" secondItem="MSh-vi-pzP" secondAttribute="trailing" constant="8" id="IiU-td-qlb"/>
                             <constraint firstItem="mvZ-AP-8HC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Uqf-0o-ptU" secondAttribute="trailing" constant="8" symbolic="YES" id="KrN-Sd-3IZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nck-az-hkB" secondAttribute="trailing" constant="30" id="PyR-de-GiR"/>
                             <constraint firstItem="Uqf-0o-ptU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Qgc-7h-gDR"/>
+                            <constraint firstItem="nck-az-hkB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mvZ-AP-8HC" secondAttribute="trailing" constant="8" symbolic="YES" id="W1H-m6-0sk"/>
                             <constraint firstItem="Uqf-0o-ptU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="XnT-yB-sxB"/>
                             <constraint firstItem="mvZ-AP-8HC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="eay-LK-YPi"/>
                             <constraint firstItem="mvZ-AP-8HC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="202" id="sbL-rk-vw2"/>
@@ -790,6 +866,7 @@
                     <connections>
                         <outlet property="correctWordLabel" destination="fUh-y9-s6K" id="QjJ-fG-GdA"/>
                         <outlet property="guesses" destination="fTp-Cp-Rhw" id="ukk-OC-dKr"/>
+                        <outlet property="hintButton" destination="nck-az-hkB" id="RN2-jk-JcB"/>
                         <outlet property="letterStack" destination="MSh-vi-pzP" id="RqV-9R-V0Q"/>
                         <outlet property="scoreLabel" destination="VTU-eq-lMN" id="LAr-KS-n7i"/>
                         <outletCollection property="letterButtons" destination="9PI-dt-oP2" collectionClass="NSMutableArray" id="efy-Kg-qNp"/>
@@ -1371,10 +1448,35 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="4WK-mw-cff"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWA-iE-DXt">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="83Y-S3-ICD"/>
+                                    <action selector="hintButtonPressed:" destination="zbi-0j-BwH" eventType="touchUpInside" id="C35-IA-TS6"/>
+                                    <action selector="hintButtonPressed:" destination="uHN-pd-QWc" eventType="touchUpInside" id="Ijf-fc-oNz"/>
+                                    <action selector="hintButtonPressed:" destination="yBA-or-EEb" eventType="touchUpInside" id="LJg-dJ-MeK"/>
+                                    <action selector="hintButtonPressed:" destination="xjt-Za-t9l" eventType="touchUpInside" id="Nwb-XR-LH5"/>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="QOe-AE-FjZ"/>
+                                    <action selector="hintButtonPressed:" destination="TRO-6t-PQm" eventType="touchUpInside" id="ahr-kD-ZkO"/>
+                                    <action selector="hintButtonPressed:" destination="83b-G1-MwI" eventType="touchUpInside" id="jjB-BU-RuK"/>
+                                    <action selector="hintButtonPressed:" destination="Xdq-Cg-EoC" eventType="touchUpInside" id="n5Y-FD-4kL"/>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sMt-Pk-7ge"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ta4-fO-XFo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="HWA-iE-DXt" firstAttribute="top" secondItem="ta4-fO-XFo" secondAttribute="top" constant="20" id="Bec-bx-8Af"/>
                             <constraint firstItem="aCz-2Z-ZOS" firstAttribute="top" secondItem="ta4-fO-XFo" secondAttribute="top" constant="20" id="GsX-H0-yqW"/>
                             <constraint firstItem="ta4-fO-XFo" firstAttribute="bottom" secondItem="Pf5-ZU-rCp" secondAttribute="bottom" id="Gxo-HP-JLT"/>
                             <constraint firstItem="aCz-2Z-ZOS" firstAttribute="leading" secondItem="ta4-fO-XFo" secondAttribute="leading" constant="30" id="WNC-oz-ghI"/>
@@ -1383,13 +1485,16 @@
                             <constraint firstItem="AI6-DA-pmW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aCz-2Z-ZOS" secondAttribute="trailing" constant="8" symbolic="YES" id="e94-g7-QQU"/>
                             <constraint firstItem="AI6-DA-pmW" firstAttribute="centerX" secondItem="Pf5-ZU-rCp" secondAttribute="centerX" id="h1c-Q3-mrZ"/>
                             <constraint firstAttribute="trailing" secondItem="Pf5-ZU-rCp" secondAttribute="trailing" constant="8" id="hhr-IM-omh"/>
+                            <constraint firstItem="HWA-iE-DXt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AI6-DA-pmW" secondAttribute="trailing" constant="8" symbolic="YES" id="nUT-Br-SwQ"/>
                             <constraint firstItem="AI6-DA-pmW" firstAttribute="leading" secondItem="ta4-fO-XFo" secondAttribute="leading" constant="202" id="o3l-1P-tYe"/>
+                            <constraint firstItem="ta4-fO-XFo" firstAttribute="trailing" secondItem="HWA-iE-DXt" secondAttribute="trailing" constant="30" id="vzm-ZQ-xz2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="B2U-2m-Lex"/>
                     <connections>
                         <outlet property="correctWordLabel" destination="UGu-TY-8wB" id="gOi-jx-EfN"/>
                         <outlet property="guesses" destination="869-WV-EYB" id="36c-sM-N3C"/>
+                        <outlet property="hintButton" destination="HWA-iE-DXt" id="Wun-en-XKC"/>
                         <outlet property="letterStack" destination="Pf5-ZU-rCp" id="mow-Ku-9De"/>
                         <outlet property="scoreLabel" destination="gsj-2e-sw3" id="Dko-pU-g2Y"/>
                         <outletCollection property="letterButtons" destination="kWu-nJ-3Lj" collectionClass="NSMutableArray" id="r06-uJ-Nnj"/>
@@ -1973,11 +2078,35 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="fKw-cx-wmy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAQ-DI-dMZ">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="yBA-or-EEb" eventType="touchUpInside" id="2P6-bn-QbI"/>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="34y-ts-UIw"/>
+                                    <action selector="hintButtonPressed:" destination="Xdq-Cg-EoC" eventType="touchUpInside" id="BaN-6H-i7z"/>
+                                    <action selector="hintButtonPressed:" destination="xjt-Za-t9l" eventType="touchUpInside" id="DrT-s8-CR1"/>
+                                    <action selector="hintButtonPressed:" destination="zbi-0j-BwH" eventType="touchUpInside" id="Gc5-PK-SPi"/>
+                                    <action selector="hintButtonPressed:" destination="uHN-pd-QWc" eventType="touchUpInside" id="Nhi-NH-bg6"/>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="VvL-SI-Hs3"/>
+                                    <action selector="hintButtonPressed:" destination="83b-G1-MwI" eventType="touchUpInside" id="cUh-VN-bqL"/>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="hjM-9i-kws"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lC1-83-Ie8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="kiG-md-JrP" secondAttribute="trailing" constant="8" id="4rp-AP-Nn3"/>
+                            <constraint firstItem="dAQ-DI-dMZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2EB-yJ-xbB" secondAttribute="trailing" constant="8" symbolic="YES" id="7Hk-mN-YwM"/>
                             <constraint firstItem="kiG-md-JrP" firstAttribute="leading" secondItem="Rpk-CI-Mr1" secondAttribute="leading" constant="8" id="KZK-no-h2N"/>
                             <constraint firstItem="2EB-yJ-xbB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fOr-VI-sJh" secondAttribute="trailing" constant="8" symbolic="YES" id="LjG-go-97F"/>
                             <constraint firstItem="lC1-83-Ie8" firstAttribute="bottom" secondItem="kiG-md-JrP" secondAttribute="bottom" id="OSH-L8-Mel"/>
@@ -1985,13 +2114,16 @@
                             <constraint firstItem="2EB-yJ-xbB" firstAttribute="top" secondItem="lC1-83-Ie8" secondAttribute="top" constant="20" id="RQj-mJ-6va"/>
                             <constraint firstItem="fOr-VI-sJh" firstAttribute="top" secondItem="lC1-83-Ie8" secondAttribute="top" constant="20" id="cKn-ct-AXo"/>
                             <constraint firstItem="fOr-VI-sJh" firstAttribute="leading" secondItem="lC1-83-Ie8" secondAttribute="leading" constant="30" id="dUr-gf-LX2"/>
+                            <constraint firstItem="lC1-83-Ie8" firstAttribute="trailing" secondItem="dAQ-DI-dMZ" secondAttribute="trailing" constant="30" id="ffF-tF-OBh"/>
                             <constraint firstItem="2EB-yJ-xbB" firstAttribute="leading" secondItem="lC1-83-Ie8" secondAttribute="leading" constant="202" id="na7-Oq-f6V"/>
+                            <constraint firstItem="dAQ-DI-dMZ" firstAttribute="top" secondItem="lC1-83-Ie8" secondAttribute="top" constant="20" id="xO0-Jo-hF2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jf8-UD-g5y"/>
                     <connections>
                         <outlet property="correctWordLabel" destination="UFe-ne-Hdm" id="5gA-5N-J0Y"/>
                         <outlet property="guesses" destination="Dd5-O5-7Jx" id="OxQ-GA-uL5"/>
+                        <outlet property="hintButton" destination="dAQ-DI-dMZ" id="Qz9-x9-HBH"/>
                         <outlet property="letterStack" destination="kiG-md-JrP" id="AHp-GO-4NZ"/>
                         <outlet property="scoreLabel" destination="UNU-rU-C5E" id="y5S-na-e4W"/>
                         <outletCollection property="letterButtons" destination="AmU-YM-F7j" collectionClass="NSMutableArray" id="wQD-5f-XQF"/>
@@ -2576,6 +2708,24 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="Yso-hk-gQp"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38y-pl-zah">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="SDa-uF-rO2"/>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="kUH-ZP-h8j"/>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vhr-mk-VIn"/>
+                                    <action selector="hintButtonPressed:" destination="zbi-0j-BwH" eventType="touchUpInside" id="wJU-TH-ggs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2eb-Q8-M9i"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2583,9 +2733,12 @@
                             <constraint firstItem="fnS-Yp-pus" firstAttribute="top" secondItem="2eb-Q8-M9i" secondAttribute="top" constant="20" id="3TU-GQ-RC0"/>
                             <constraint firstItem="2eb-Q8-M9i" firstAttribute="bottom" secondItem="8fz-8l-YXh" secondAttribute="bottom" id="6BF-H4-5yp"/>
                             <constraint firstItem="Q0O-e1-ZfS" firstAttribute="leading" secondItem="2eb-Q8-M9i" secondAttribute="leading" constant="202" id="FtA-AT-aAY"/>
+                            <constraint firstItem="38y-pl-zah" firstAttribute="top" secondItem="2eb-Q8-M9i" secondAttribute="top" constant="20" id="JKX-Lh-j17"/>
+                            <constraint firstItem="2eb-Q8-M9i" firstAttribute="trailing" secondItem="38y-pl-zah" secondAttribute="trailing" constant="30" id="MPw-pm-Vv2"/>
                             <constraint firstAttribute="trailing" secondItem="8fz-8l-YXh" secondAttribute="trailing" constant="8" id="Vcb-CM-67e"/>
                             <constraint firstItem="fnS-Yp-pus" firstAttribute="leading" secondItem="2eb-Q8-M9i" secondAttribute="leading" constant="30" id="ckQ-5L-0sX"/>
                             <constraint firstItem="Q0O-e1-ZfS" firstAttribute="centerX" secondItem="8fz-8l-YXh" secondAttribute="centerX" id="fV7-Oa-Wql"/>
+                            <constraint firstItem="38y-pl-zah" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Q0O-e1-ZfS" secondAttribute="trailing" constant="8" symbolic="YES" id="h8P-s0-F7C"/>
                             <constraint firstItem="Q0O-e1-ZfS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnS-Yp-pus" secondAttribute="trailing" constant="8" symbolic="YES" id="i7b-0a-3bd"/>
                             <constraint firstItem="Q0O-e1-ZfS" firstAttribute="top" secondItem="2eb-Q8-M9i" secondAttribute="top" constant="20" id="sYB-Px-d56"/>
                             <constraint firstItem="8fz-8l-YXh" firstAttribute="leading" secondItem="JRN-e8-vAk" secondAttribute="leading" constant="8" id="wAJ-kd-CVT"/>
@@ -2595,6 +2748,7 @@
                     <connections>
                         <outlet property="correctWordLabel" destination="zqb-Bz-98v" id="bBU-Pi-c2d"/>
                         <outlet property="guesses" destination="Fqd-kL-XT7" id="6fL-Fa-Wdc"/>
+                        <outlet property="hintButton" destination="38y-pl-zah" id="qie-Of-C4c"/>
                         <outlet property="letterStack" destination="8fz-8l-YXh" id="ZR4-Vf-MFZ"/>
                         <outlet property="scoreLabel" destination="0sv-XK-Zkn" id="J4c-o6-trN"/>
                         <outletCollection property="letterButtons" destination="tXE-2x-qBb" collectionClass="NSMutableArray" id="PZf-vQ-MBx"/>
@@ -3179,6 +3333,25 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="haB-1x-i5B"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoK-t6-qLA">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="zbi-0j-BwH" eventType="touchUpInside" id="CRF-cc-ysZ"/>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GE3-QH-2Ge"/>
+                                    <action selector="hintButtonPressed:" destination="xjt-Za-t9l" eventType="touchUpInside" id="aoG-NG-Vmm"/>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="cbx-Al-UP9"/>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="zIw-JG-za2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BsV-an-qxL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3186,10 +3359,13 @@
                             <constraint firstItem="JOy-FG-Wyh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gXY-Bb-ioI" secondAttribute="trailing" constant="8" symbolic="YES" id="1HA-gj-MqC"/>
                             <constraint firstItem="JOy-FG-Wyh" firstAttribute="centerX" secondItem="bMm-R4-omY" secondAttribute="centerX" id="2Ef-Kp-Yr9"/>
                             <constraint firstItem="gXY-Bb-ioI" firstAttribute="top" secondItem="BsV-an-qxL" secondAttribute="top" constant="20" id="3HV-HF-tLr"/>
+                            <constraint firstItem="yoK-t6-qLA" firstAttribute="top" secondItem="BsV-an-qxL" secondAttribute="top" constant="20" id="Bh7-W3-7KJ"/>
                             <constraint firstItem="BsV-an-qxL" firstAttribute="bottom" secondItem="bMm-R4-omY" secondAttribute="bottom" id="J4h-E0-CBg"/>
                             <constraint firstAttribute="trailing" secondItem="bMm-R4-omY" secondAttribute="trailing" constant="8" id="LkQ-Tx-P8n"/>
                             <constraint firstItem="JOy-FG-Wyh" firstAttribute="top" secondItem="BsV-an-qxL" secondAttribute="top" constant="20" id="UOW-oB-owb"/>
                             <constraint firstItem="JOy-FG-Wyh" firstAttribute="leading" secondItem="BsV-an-qxL" secondAttribute="leading" constant="202" id="c0s-cv-U4V"/>
+                            <constraint firstItem="yoK-t6-qLA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JOy-FG-Wyh" secondAttribute="trailing" constant="8" symbolic="YES" id="gqV-RX-Dru"/>
+                            <constraint firstItem="BsV-an-qxL" firstAttribute="trailing" secondItem="yoK-t6-qLA" secondAttribute="trailing" constant="30" id="mgf-Xf-8bN"/>
                             <constraint firstItem="gXY-Bb-ioI" firstAttribute="leading" secondItem="BsV-an-qxL" secondAttribute="leading" constant="30" id="saJ-cI-eXt"/>
                             <constraint firstItem="bMm-R4-omY" firstAttribute="leading" secondItem="zQC-rj-7Mr" secondAttribute="leading" constant="8" id="zz0-gt-nPO"/>
                         </constraints>
@@ -3198,6 +3374,7 @@
                     <connections>
                         <outlet property="correctWordLabel" destination="KK9-hc-2R9" id="7gt-KN-xj4"/>
                         <outlet property="guesses" destination="sXn-qN-6gA" id="85f-Y5-wyc"/>
+                        <outlet property="hintButton" destination="yoK-t6-qLA" id="b44-IF-rvq"/>
                         <outlet property="letterStack" destination="bMm-R4-omY" id="vy5-to-9qw"/>
                         <outlet property="scoreLabel" destination="NVE-bo-oDu" id="ADS-jz-tJ6"/>
                         <outletCollection property="letterButtons" destination="NuW-ro-AhT" collectionClass="NSMutableArray" id="HhL-2b-IC9"/>
@@ -3782,6 +3959,26 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="e5a-ix-wH2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDs-gP-ynW">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="2Ms-eT-TdM"/>
+                                    <action selector="hintButtonPressed:" destination="zbi-0j-BwH" eventType="touchUpInside" id="Ku2-qe-zpW"/>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lbs-M7-KEf"/>
+                                    <action selector="hintButtonPressed:" destination="yBA-or-EEb" eventType="touchUpInside" id="TEy-P5-DxF"/>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="cnt-Gi-622"/>
+                                    <action selector="hintButtonPressed:" destination="xjt-Za-t9l" eventType="touchUpInside" id="xgt-lG-7vM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HQO-mh-YCi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3792,15 +3989,19 @@
                             <constraint firstItem="TJ5-lU-1le" firstAttribute="leading" secondItem="ZUJ-G9-cID" secondAttribute="leading" constant="8" id="DUt-Ik-jqF"/>
                             <constraint firstItem="dRk-oG-eNN" firstAttribute="leading" secondItem="HQO-mh-YCi" secondAttribute="leading" constant="30" id="JxU-Yf-xss"/>
                             <constraint firstItem="eK9-o7-HeR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dRk-oG-eNN" secondAttribute="trailing" constant="8" symbolic="YES" id="MEV-KK-yTc"/>
+                            <constraint firstItem="tDs-gP-ynW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eK9-o7-HeR" secondAttribute="trailing" constant="8" symbolic="YES" id="QFX-C2-qnN"/>
+                            <constraint firstItem="tDs-gP-ynW" firstAttribute="top" secondItem="HQO-mh-YCi" secondAttribute="top" constant="20" id="YOC-aS-J3a"/>
                             <constraint firstItem="HQO-mh-YCi" firstAttribute="bottom" secondItem="TJ5-lU-1le" secondAttribute="bottom" id="bOY-nl-tDn"/>
                             <constraint firstItem="eK9-o7-HeR" firstAttribute="leading" secondItem="HQO-mh-YCi" secondAttribute="leading" constant="202" id="eeo-v6-nqd"/>
                             <constraint firstAttribute="trailing" secondItem="TJ5-lU-1le" secondAttribute="trailing" constant="8" id="gBl-dI-tq5"/>
+                            <constraint firstItem="HQO-mh-YCi" firstAttribute="trailing" secondItem="tDs-gP-ynW" secondAttribute="trailing" constant="30" id="kQR-5Y-aQY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GWj-8y-DsL"/>
                     <connections>
                         <outlet property="correctWordLabel" destination="AlJ-o0-Tz8" id="4QE-3J-hPJ"/>
                         <outlet property="guesses" destination="Brj-vw-Aq2" id="YMf-ub-aWR"/>
+                        <outlet property="hintButton" destination="tDs-gP-ynW" id="ZpW-nh-1GD"/>
                         <outlet property="letterStack" destination="TJ5-lU-1le" id="Ntu-Xb-abl"/>
                         <outlet property="scoreLabel" destination="OQB-QU-MYS" id="T9p-wr-maa"/>
                         <outletCollection property="letterButtons" destination="u0G-if-AeN" collectionClass="NSMutableArray" id="fgN-Un-maC"/>
@@ -4386,6 +4587,22 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="foK-7g-h4M"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsc-0f-Flj">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="NEC-on-X08"/>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="q76-ZP-tvG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="olP-Qq-GAP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4393,10 +4610,13 @@
                             <constraint firstItem="9IE-5d-ggM" firstAttribute="top" secondItem="olP-Qq-GAP" secondAttribute="top" constant="20" id="2q5-io-Mop"/>
                             <constraint firstItem="olP-Qq-GAP" firstAttribute="bottom" secondItem="w1Z-R9-rgm" secondAttribute="bottom" id="AvZ-TR-XQR"/>
                             <constraint firstItem="Taq-k6-dKR" firstAttribute="top" secondItem="olP-Qq-GAP" secondAttribute="top" constant="20" id="It5-zA-RCb"/>
+                            <constraint firstItem="olP-Qq-GAP" firstAttribute="trailing" secondItem="lsc-0f-Flj" secondAttribute="trailing" constant="30" id="Lv9-dF-4Za"/>
                             <constraint firstItem="Taq-k6-dKR" firstAttribute="leading" secondItem="olP-Qq-GAP" secondAttribute="leading" constant="202" id="Nsc-Lv-E8n"/>
+                            <constraint firstItem="lsc-0f-Flj" firstAttribute="top" secondItem="olP-Qq-GAP" secondAttribute="top" constant="20" id="PEk-dj-Nhb"/>
                             <constraint firstItem="Taq-k6-dKR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9IE-5d-ggM" secondAttribute="trailing" constant="8" symbolic="YES" id="aFo-zU-yB7"/>
                             <constraint firstItem="Taq-k6-dKR" firstAttribute="centerX" secondItem="w1Z-R9-rgm" secondAttribute="centerX" id="dld-hK-6tN"/>
                             <constraint firstAttribute="trailing" secondItem="w1Z-R9-rgm" secondAttribute="trailing" constant="8" id="gad-bK-qfj"/>
+                            <constraint firstItem="lsc-0f-Flj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Taq-k6-dKR" secondAttribute="trailing" constant="8" symbolic="YES" id="qoN-Ab-Qg1"/>
                             <constraint firstItem="9IE-5d-ggM" firstAttribute="leading" secondItem="olP-Qq-GAP" secondAttribute="leading" constant="30" id="rba-Hh-PH4"/>
                             <constraint firstItem="w1Z-R9-rgm" firstAttribute="leading" secondItem="UCW-5F-YnT" secondAttribute="leading" constant="8" id="zR1-4F-mNW"/>
                         </constraints>
@@ -4405,6 +4625,7 @@
                     <connections>
                         <outlet property="correctWordLabel" destination="2Rt-SC-Prv" id="3so-aO-Ptg"/>
                         <outlet property="guesses" destination="h7P-hi-miI" id="guN-nn-fnV"/>
+                        <outlet property="hintButton" destination="lsc-0f-Flj" id="aue-ik-ift"/>
                         <outlet property="letterStack" destination="w1Z-R9-rgm" id="fhj-yT-jYh"/>
                         <outlet property="scoreLabel" destination="oSa-fZ-Avn" id="xCi-t4-yNX"/>
                         <outletCollection property="letterButtons" destination="3xz-Cd-CNE" collectionClass="NSMutableArray" id="UNA-RV-pJW"/>
@@ -4986,25 +5207,51 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="wCM-DC-ZHx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlO-if-86h">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="2vm-xf-f2E"/>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ed-T5-EFp"/>
+                                    <action selector="hintButtonPressed:" destination="zbi-0j-BwH" eventType="touchUpInside" id="80e-Qn-hQa"/>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="ICW-oo-cAF"/>
+                                    <action selector="hintButtonPressed:" destination="83b-G1-MwI" eventType="touchUpInside" id="Os3-bI-fsq"/>
+                                    <action selector="hintButtonPressed:" destination="yBA-or-EEb" eventType="touchUpInside" id="WaF-VK-3dR"/>
+                                    <action selector="hintButtonPressed:" destination="xjt-Za-t9l" eventType="touchUpInside" id="Xqu-zF-cA5"/>
+                                    <action selector="hintButtonPressed:" destination="Xdq-Cg-EoC" eventType="touchUpInside" id="l4o-hE-XtJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7lF-BV-qPb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lmL-7s-stm" firstAttribute="leading" secondItem="nWe-ia-Kac" secondAttribute="leading" constant="8" id="0Dq-xf-OVz"/>
                             <constraint firstAttribute="trailing" secondItem="lmL-7s-stm" secondAttribute="trailing" constant="8" id="0fu-9z-QbJ"/>
+                            <constraint firstItem="KlO-if-86h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2Zb-6N-AAt" secondAttribute="trailing" constant="8" symbolic="YES" id="2rC-Za-ndM"/>
                             <constraint firstItem="2Zb-6N-AAt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MyW-Fr-d8l" secondAttribute="trailing" constant="8" symbolic="YES" id="4sY-OU-X1u"/>
+                            <constraint firstItem="KlO-if-86h" firstAttribute="top" secondItem="7lF-BV-qPb" secondAttribute="top" constant="20" id="7Zo-55-u7H"/>
                             <constraint firstItem="7lF-BV-qPb" firstAttribute="bottom" secondItem="lmL-7s-stm" secondAttribute="bottom" id="9AQ-FR-fNY"/>
                             <constraint firstItem="2Zb-6N-AAt" firstAttribute="centerX" secondItem="lmL-7s-stm" secondAttribute="centerX" id="J9a-c9-bsy"/>
                             <constraint firstItem="2Zb-6N-AAt" firstAttribute="leading" secondItem="7lF-BV-qPb" secondAttribute="leading" constant="202" id="WPZ-ZL-dH9"/>
                             <constraint firstItem="2Zb-6N-AAt" firstAttribute="top" secondItem="7lF-BV-qPb" secondAttribute="top" constant="20" id="dfr-2J-S5Z"/>
                             <constraint firstItem="MyW-Fr-d8l" firstAttribute="leading" secondItem="7lF-BV-qPb" secondAttribute="leading" constant="30" id="oNq-Lf-zBR"/>
                             <constraint firstItem="MyW-Fr-d8l" firstAttribute="top" secondItem="7lF-BV-qPb" secondAttribute="top" constant="20" id="rSH-vb-h7k"/>
+                            <constraint firstItem="7lF-BV-qPb" firstAttribute="trailing" secondItem="KlO-if-86h" secondAttribute="trailing" constant="30" id="xQ0-Ek-fUp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Szd-3w-bWq"/>
                     <connections>
                         <outlet property="correctWordLabel" destination="KxF-H1-IE7" id="5xH-lL-mRW"/>
                         <outlet property="guesses" destination="ZqM-ty-zpo" id="3ob-UR-9S0"/>
+                        <outlet property="hintButton" destination="KlO-if-86h" id="FBS-lB-MPn"/>
                         <outlet property="letterStack" destination="lmL-7s-stm" id="cc4-xQ-MF8"/>
                         <outlet property="scoreLabel" destination="mBX-uY-0j9" id="2DC-El-ues"/>
                         <outletCollection property="letterButtons" destination="Mcg-9j-PbE" collectionClass="NSMutableArray" id="qaI-l6-X0v"/>
@@ -5588,6 +5835,27 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="qpt-en-txj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAF-QH-Xlm">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="zbi-0j-BwH" eventType="touchUpInside" id="GmY-K3-Dh4"/>
+                                    <action selector="hintButtonPressed:" destination="xjt-Za-t9l" eventType="touchUpInside" id="QbC-Qe-Pua"/>
+                                    <action selector="hintButtonPressed:" destination="Xdq-Cg-EoC" eventType="touchUpInside" id="a3i-TD-v1C"/>
+                                    <action selector="hintButtonPressed:" destination="HOz-ae-KTT" eventType="touchUpInside" id="etp-30-7Jg"/>
+                                    <action selector="hintButtonPressed:" destination="yBA-or-EEb" eventType="touchUpInside" id="qof-wO-lC7"/>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="rni-8F-VaY"/>
+                                    <action selector="hintButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="udk-U8-sTB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zgW-gc-pau"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -5599,7 +5867,10 @@
                             <constraint firstItem="Tbu-hS-QNh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lZv-iM-goG" secondAttribute="trailing" constant="8" symbolic="YES" id="RfR-ZP-DNV"/>
                             <constraint firstItem="Tbu-hS-QNh" firstAttribute="leading" secondItem="zgW-gc-pau" secondAttribute="leading" constant="202" id="T03-4Y-ut4"/>
                             <constraint firstAttribute="trailing" secondItem="FOl-Tq-qe9" secondAttribute="trailing" constant="8" id="Zaq-k4-38f"/>
+                            <constraint firstItem="eAF-QH-Xlm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Tbu-hS-QNh" secondAttribute="trailing" constant="8" symbolic="YES" id="bNF-cj-nU0"/>
                             <constraint firstItem="lZv-iM-goG" firstAttribute="top" secondItem="zgW-gc-pau" secondAttribute="top" constant="20" id="ita-PS-EZC"/>
+                            <constraint firstItem="zgW-gc-pau" firstAttribute="trailing" secondItem="eAF-QH-Xlm" secondAttribute="trailing" constant="30" id="s2O-8o-0pg"/>
+                            <constraint firstItem="eAF-QH-Xlm" firstAttribute="top" secondItem="zgW-gc-pau" secondAttribute="top" constant="20" id="vJy-JJ-zId"/>
                             <constraint firstItem="Tbu-hS-QNh" firstAttribute="top" secondItem="zgW-gc-pau" secondAttribute="top" constant="20" id="w08-sX-aFq"/>
                         </constraints>
                     </view>
@@ -5607,6 +5878,7 @@
                     <connections>
                         <outlet property="correctWordLabel" destination="D2G-uL-ckt" id="q8X-1K-pEo"/>
                         <outlet property="guesses" destination="aad-zL-hDO" id="wjG-FY-xae"/>
+                        <outlet property="hintButton" destination="eAF-QH-Xlm" id="pJX-Mo-v75"/>
                         <outlet property="letterStack" destination="FOl-Tq-qe9" id="Lo7-lL-fK8"/>
                         <outlet property="scoreLabel" destination="QWE-VS-qro" id="lux-24-V9R"/>
                         <outletCollection property="letterButtons" destination="gwD-HC-Z4n" collectionClass="NSMutableArray" id="1iU-FD-Hh8"/>
@@ -6190,6 +6462,21 @@
                                     <segue destination="7nj-Xn-UyF" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="5gF-IH-bKg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FBf-Wx-WlY">
+                                <rect key="frame" x="702" y="20" width="88" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Hint" cornerStyle="medium">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="hintButtonPressed:" destination="TaV-Pj-VlE" eventType="touchUpInside" id="HUE-eK-tdV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JVM-zz-FAB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -6199,9 +6486,12 @@
                             <constraint firstItem="aeT-FF-JiZ" firstAttribute="top" secondItem="JVM-zz-FAB" secondAttribute="top" constant="20" id="MQg-1t-5te"/>
                             <constraint firstItem="9DO-7a-fvT" firstAttribute="leading" secondItem="JVM-zz-FAB" secondAttribute="leading" constant="30" id="PO5-ii-pWg"/>
                             <constraint firstItem="kjX-81-Ktz" firstAttribute="leading" secondItem="igh-yT-Rah" secondAttribute="leading" constant="8" id="XBF-jB-tSe"/>
+                            <constraint firstItem="FBf-Wx-WlY" firstAttribute="top" secondItem="JVM-zz-FAB" secondAttribute="top" constant="20" id="YvZ-OT-aMN"/>
+                            <constraint firstItem="FBf-Wx-WlY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aeT-FF-JiZ" secondAttribute="trailing" constant="8" symbolic="YES" id="ZLr-0s-xPx"/>
                             <constraint firstItem="JVM-zz-FAB" firstAttribute="bottom" secondItem="kjX-81-Ktz" secondAttribute="bottom" id="dI4-fj-ym0"/>
                             <constraint firstItem="aeT-FF-JiZ" firstAttribute="centerX" secondItem="kjX-81-Ktz" secondAttribute="centerX" id="r0M-NM-qfg"/>
                             <constraint firstItem="aeT-FF-JiZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9DO-7a-fvT" secondAttribute="trailing" constant="8" symbolic="YES" id="shO-Zw-qfB"/>
+                            <constraint firstItem="JVM-zz-FAB" firstAttribute="trailing" secondItem="FBf-Wx-WlY" secondAttribute="trailing" constant="30" id="vpi-OW-2Yj"/>
                             <constraint firstAttribute="trailing" secondItem="kjX-81-Ktz" secondAttribute="trailing" constant="8" id="y9N-fa-MMh"/>
                         </constraints>
                     </view>
@@ -6209,6 +6499,7 @@
                     <connections>
                         <outlet property="correctWordLabel" destination="bwW-vb-A4l" id="f1R-Eb-f12"/>
                         <outlet property="guesses" destination="0SS-aW-O41" id="qkH-Gb-V5s"/>
+                        <outlet property="hintButton" destination="FBf-Wx-WlY" id="KQc-aC-aRf"/>
                         <outlet property="letterStack" destination="kjX-81-Ktz" id="ycM-VK-MEl"/>
                         <outlet property="scoreLabel" destination="bPC-Do-cmF" id="Eey-Wn-pMV"/>
                         <outletCollection property="letterButtons" destination="frK-6j-FjA" collectionClass="NSMutableArray" id="gdP-5Q-aeF"/>
@@ -6247,7 +6538,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5gF-IH-bKg"/>
+        <segue reference="e5a-ix-wH2"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="brisketbutton" width="2048" height="1024"/>
